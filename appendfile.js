@@ -7,16 +7,21 @@ function appendFiles(path1, path2) {
       if (err) {
         return reject(err);
       }
-      fs.appendFile(path.resolve(__dirname, path2), data, (err, data) => {
+      fs.appendFile(path.resolve(__dirname, path2), data, err => {
         if (err) {
+          console.log('---', err);
           throw err;
         }
-        console.log('nddjd', data);
+        // console.log('nddjd', data);
       });
     });
   });
 }
 
 (async () => {
-  await appendFiles('foo.txt', 'xyz.txt');
+  try {
+    await appendFiles('foo.txt', 'xyz.txt');
+  } catch (err) {
+    console.log(err);
+  }
 })();
